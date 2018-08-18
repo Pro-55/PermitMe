@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PermitMe</string>
+    <string name="button_text">Open Camera</string>
+    <string name="back_button">Back</string>
+    <string name="shared_preferences_key">SHARED_PREFERENCES_KEY</string>
+    <string name="permission_camera">PERMISSION_CAMERA</string>
+    <string name="permission_storage">PERMISSION_STORAGE</string>
+</resources>
