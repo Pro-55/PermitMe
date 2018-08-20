@@ -58,27 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 flag = true;
             } else if (flag) {
                 Log.d(TAG, "LogTag: checkPermissions: Asking for All Permissions: 3");
-                new AlertDialog.Builder(this)
-                        .setTitle("We Need:")
-                        .setMessage("Your Camera & Storage!")
-                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(MainActivity.this, "Please Enable The permission Manually", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent();
-                                intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                Uri uri = Uri.fromParts("package", MainActivity.this.getPackageName(), null);
-                                intent.setData(uri);
-                                MainActivity.this.startActivity(intent);
-                            }
-                        })
-                        .setNegativeButton("nope", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .create().show();
+                onDialog("Camera & Storage");
             } else {
                 Log.d(TAG, "LogTag: checkPermissions: Asking for All Permissions: 1");
                 ActivityCompat.requestPermissions(MainActivity.this, permissions, PERMISSION_REQUEST_CODE);
@@ -91,29 +71,9 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "LogTag: checkPermissions: Asking for Camera Permission: 2");
                 ActivityCompat.requestPermissions(MainActivity.this, permissions, PERMISSION_REQUEST_CODE);
                 flag = true;
-            } else if(flag) {
+            } else if (flag) {
                 Log.d(TAG, "LogTag: checkPermissions: Asking for Camera Permission: 3");
-                new AlertDialog.Builder(this)
-                        .setTitle("We Need:")
-                        .setMessage("Your Camera!")
-                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(MainActivity.this, "Please Enable The permission Manually", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent();
-                                intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                Uri uri = Uri.fromParts("package", MainActivity.this.getPackageName(), null);
-                                intent.setData(uri);
-                                MainActivity.this.startActivity(intent);
-                            }
-                        })
-                        .setNegativeButton("nope", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .create().show();
+                onDialog("Camera");
             } else {
                 Log.d(TAG, "LogTag: checkPermissions: Asking for Camera Permission: 2");
                 ActivityCompat.requestPermissions(MainActivity.this, permissions, PERMISSION_REQUEST_CODE);
@@ -126,29 +86,9 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "LogTag: checkPermissions: Asking for Storage Permission: 2");
                 ActivityCompat.requestPermissions(MainActivity.this, permissions, PERMISSION_REQUEST_CODE);
                 flag = true;
-            } else if(flag) {
+            } else if (flag) {
                 Log.d(TAG, "LogTag: checkPermissions: Asking for Storage Permission: 3");
-                new AlertDialog.Builder(this)
-                        .setTitle("We Need:")
-                        .setMessage("Your Storage!")
-                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(MainActivity.this, "Please Enable The permission Manually", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent();
-                                intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                Uri uri = Uri.fromParts("package", MainActivity.this.getPackageName(), null);
-                                intent.setData(uri);
-                                MainActivity.this.startActivity(intent);
-                            }
-                        })
-                        .setNegativeButton("nope", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .create().show();
+                onDialog("Storage");
             } else {
                 Log.d(TAG, "LogTag: checkPermissions: Asking for Storage Permission: 2");
                 ActivityCompat.requestPermissions(MainActivity.this, permissions, PERMISSION_REQUEST_CODE);
@@ -170,5 +110,29 @@ public class MainActivity extends AppCompatActivity {
                                            @NonNull int[] grantResults) {
         Log.d(TAG, "LogTag: onRequestPermissionsResult: Checking Permission Result!");
         checkPermissions();
+    }
+
+    public void onDialog(String message) {
+        new AlertDialog.Builder(this)
+                .setTitle("We Need:")
+                .setMessage("Your " + message + "!")
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "Please Enable The permission Manually", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent();
+                        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        Uri uri = Uri.fromParts("package", MainActivity.this.getPackageName(), null);
+                        intent.setData(uri);
+                        MainActivity.this.startActivity(intent);
+                    }
+                })
+                .setNegativeButton("nope", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create().show();
     }
 }
